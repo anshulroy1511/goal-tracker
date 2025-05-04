@@ -34,6 +34,7 @@ type Goal = {
 const GoalTracker = () => {
   const dashboardRef = useRef<HTMLDivElement>(null);
   const goalsRef = useRef<HTMLDivElement>(null);
+  const getStartedRef = useRef<HTMLDivElement>(null);
   const [theme, setTheme] = useState<Theme>("light");
   const [showSettings, setShowSettings] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -395,6 +396,7 @@ const GoalTracker = () => {
         </motion.p>
         <button
           className={`${themeClasses[theme].button} text-white cursor-pointer font-semibold py-3 px-6 rounded-xl shadow-lg transition`}
+          onClick={() => goalsRef.current?.scrollIntoView({ behavior: "smooth" })}
         >
           Get Started
         </button>
@@ -598,7 +600,7 @@ const GoalTracker = () => {
         }`}
       >
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-semibold">📊 Your Goals</h2>
+          <h2 className="text-3xl font-semibold" ref={getStartedRef}>📊 Your Goals</h2>
           <button
             onClick={() => setShowModal(true)}
             className={`${themeClasses[theme].button} text-white cursor-pointer px-4 py-2 rounded transition`}
