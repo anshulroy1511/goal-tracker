@@ -8,6 +8,51 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import { 
+  FaMoon, 
+  FaSun, 
+  FaStar, 
+  FaRegStar, 
+  FaCheck, 
+  FaRocket, 
+  FaTrophy, 
+  FaMedal,
+  FaCalendarAlt,
+  FaUserFriends,
+  FaComment,
+  FaArchive,
+  FaTrash,
+  FaPlus,
+  FaCog,
+  FaFileExport,
+  FaFileImport,
+  FaChartLine,
+  FaChartPie,
+  FaSearch,
+  FaFilter,
+  FaLightbulb,
+  FaRunning,
+  FaBook,
+  FaBriefcase,
+  FaHeart,
+  FaChevronRight,
+  FaChevronLeft
+} from "react-icons/fa";
+import { 
+  IoMdClose,
+  IoMdSettings,
+  IoMdNotifications
+} from "react-icons/io";
+import { 
+  BsFillCloudSunFill,
+  BsFillTreeFill,
+  BsDropletFill,
+  BsThreeDotsVertical
+} from "react-icons/bs";
+import { 
+  RiPlantLine,
+  RiSailboatLine
+} from "react-icons/ri";
 
 type Theme = "light" | "dark" | "night" | "ocean" | "forest";
 type Priority = "low" | "medium" | "high";
@@ -175,6 +220,7 @@ const GoalTracker = () => {
       button: "bg-indigo-600 hover:bg-indigo-700",
       progress: "bg-indigo-500",
       chartBg: "bg-white",
+      icon: <FaSun className="inline" />
     },
     dark: {
       bg: "bg-gray-900",
@@ -184,6 +230,7 @@ const GoalTracker = () => {
       button: "bg-indigo-500 hover:bg-indigo-600",
       progress: "bg-indigo-400",
       chartBg: "bg-gray-800",
+      icon: <FaMoon className="inline" />
     },
     night: {
       bg: "bg-[#0e0c1b]",
@@ -193,6 +240,7 @@ const GoalTracker = () => {
       button: "bg-purple-600 hover:bg-purple-700",
       progress: "bg-purple-500",
       chartBg: "bg-[#1a1730]",
+      icon: <FaMoon className="inline" />
     },
     ocean: {
       bg: "bg-[#e0f7fa]",
@@ -202,6 +250,7 @@ const GoalTracker = () => {
       button: "bg-[#00acc1] hover:bg-[#00838f]",
       progress: "bg-[#00bcd4]",
       chartBg: "bg-white",
+      icon: <BsDropletFill className="inline" />
     },
     forest: {
       bg: "bg-[#e8f5e9]",
@@ -211,6 +260,7 @@ const GoalTracker = () => {
       button: "bg-[#4caf50] hover:bg-[#388e3c]",
       progress: "bg-[#66bb6a]",
       chartBg: "bg-white",
+      icon: <BsFillTreeFill className="inline" />
     },
   };
 
@@ -317,6 +367,7 @@ const GoalTracker = () => {
       category: "learning",
       tags: ["education", "growth"],
       progress: 0,
+      icon: <FaBook className="text-blue-500" />
     },
     {
       name: "Fitness Challenge",
@@ -324,6 +375,15 @@ const GoalTracker = () => {
       category: "health",
       tags: ["exercise", "wellness"],
       progress: 0,
+      icon: <FaRunning className="text-green-500" />
+    },
+    {
+      name: "Work Project",
+      description: "Complete major work initiative",
+      category: "work",
+      tags: ["professional", "career"],
+      progress: 0,
+      icon: <FaBriefcase className="text-indigo-500" />
     },
   ];
 
@@ -335,36 +395,40 @@ const GoalTracker = () => {
       <nav
         className={`flex justify-between items-center p-6 shadow-md sticky top-0 z-50 ${themeClasses[theme].nav}`}
       >
-        <div className="text-2xl font-bold text-indigo-600">🎯 GoalTrackr</div>
+        <div className="text-2xl font-bold text-indigo-600 flex items-center">
+          <FaTrophy className="mr-2" /> GoalTrackr
+        </div>
         <div className="flex gap-6 text-sm font-medium">
-          <button onClick={() => dashboardRef.current?.scrollIntoView({ behavior: "smooth" })} className="hover:text-indigo-600 transition cursor-pointer">
-            Dashboard
+          <button onClick={() => dashboardRef.current?.scrollIntoView({ behavior: "smooth" })} className="hover:text-indigo-600 transition cursor-pointer flex items-center">
+            <FaChartPie className="mr-1" /> Dashboard
           </button>
-          <button  onClick={() => goalsRef.current?.scrollIntoView({ behavior: "smooth" })} className="hover:text-indigo-600 transition cursor-pointer">Goals</button>
+          <button onClick={() => goalsRef.current?.scrollIntoView({ behavior: "smooth" })} className="hover:text-indigo-600 transition cursor-pointer flex items-center">
+            <FaCheck className="mr-1" /> Goals
+          </button>
           <button
             onClick={() => setShowSettings(true)}
-            className="hover:text-indigo-600 transition cursor-pointer"
+            className="hover:text-indigo-600 transition cursor-pointer flex items-center"
           >
-            Settings
+            <IoMdSettings className="mr-1" /> Settings
           </button>
           <button
             onClick={toggleTheme}
-            className="text-sm px-3 py-1 cursor-pointer rounded border hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+            className="text-sm px-3 py-1 cursor-pointer rounded border hover:bg-gray-200 dark:hover:bg-gray-700 transition flex items-center"
           >
             {(() => {
               switch (theme) {
                 case "light":
-                  return "🌙 Dark Mode";
+                  return <><FaMoon className="mr-1" /> Dark Mode</>;
                 case "dark":
-                  return "🌘 Night Mode";
+                  return <><FaMoon className="mr-1" /> Night Mode</>;
                 case "night":
-                  return "🌊 Ocean Mode";
+                  return <><BsDropletFill className="mr-1" /> Ocean Mode</>;
                 case "ocean":
-                  return "🌲 Forest Mode";
+                  return <><BsFillTreeFill className="mr-1" /> Forest Mode</>;
                 case "forest":
-                  return "☀️ Light Mode";
+                  return <><FaSun className="mr-1" /> Light Mode</>;
                 default:
-                  return "🌙 Dark Mode";
+                  return <><FaMoon className="mr-1" /> Dark Mode</>;
               }
             })()}
           </button>
@@ -395,19 +459,23 @@ const GoalTracker = () => {
           milestones, and get feedback—all in one powerful dashboard.
         </motion.p>
         <button
-          className={`${themeClasses[theme].button} text-white cursor-pointer font-semibold py-3 px-6 rounded-xl shadow-lg transition`}
+          className={`${themeClasses[theme].button} text-white cursor-pointer font-semibold py-3 px-6 rounded-xl shadow-lg transition flex items-center`}
           onClick={() => goalsRef.current?.scrollIntoView({ behavior: "smooth" })}
         >
-          Get Started
+          Get Started <FaChevronRight className="ml-2" />
         </button>
       </section>
 
       {/* Statistics Dashboard */}
       <section className="mt-10 p-6 bg-white rounded-lg shadow mx-5">
-        <h2 className="text-2xl font-bold mb-6">📊 Goal Statistics</h2>
+        <h2 className="text-2xl font-bold mb-6 flex items-center">
+          <FaChartLine className="mr-2" /> Goal Statistics
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-4 bg-indigo-50 rounded-lg">
-            <h3 className="font-medium text-indigo-800">Goals Completed</h3>
+            <h3 className="font-medium text-indigo-800 flex items-center">
+              <FaCheck className="mr-2" /> Goals Completed
+            </h3>
             <p className="text-3xl font-bold mt-2">{completed}</p>
             <p className="text-sm text-indigo-600">
               {goals.length > 0
@@ -417,7 +485,9 @@ const GoalTracker = () => {
             </p>
           </div>
           <div className="p-4 bg-green-50 rounded-lg">
-            <h3 className="font-medium text-green-800">Avg. Progress</h3>
+            <h3 className="font-medium text-green-800 flex items-center">
+              <FaChartLine className="mr-2" /> Avg. Progress
+            </h3>
             <p className="text-3xl font-bold mt-2">
               {goals.length > 0
                 ? Math.round(
@@ -430,7 +500,9 @@ const GoalTracker = () => {
             <p className="text-sm text-green-600">Across all active goals</p>
           </div>
           <div className="p-4 bg-purple-50 rounded-lg">
-            <h3 className="font-medium text-purple-800">Goals by Category</h3>
+            <h3 className="font-medium text-purple-800 flex items-center">
+              <FaFilter className="mr-2" /> Goals by Category
+            </h3>
             <div className="mt-2 space-y-1">
               {Object.entries(
                 goals.reduce((acc, goal) => {
@@ -440,7 +512,13 @@ const GoalTracker = () => {
                 }, {} as Record<string, number>)
               ).map(([category, count]) => (
                 <div key={category} className="flex justify-between">
-                  <span>{category}</span>
+                  <span className="flex items-center">
+                    {category === "work" && <FaBriefcase className="mr-1" />}
+                    {category === "personal" && <FaHeart className="mr-1" />}
+                    {category === "health" && <FaRunning className="mr-1" />}
+                    {category === "learning" && <FaBook className="mr-1" />}
+                    {category}
+                  </span>
                   <span className="font-medium">{count}</span>
                 </div>
               ))}
@@ -451,7 +529,9 @@ const GoalTracker = () => {
 
       {/* Progress Overview */}
       <section className="mt-10 ml-5 w-[95%]">
-        <h2 className="text-2xl font-bold mb-4">📈 Progress Overview</h2>
+        <h2 className="text-2xl font-bold mb-4 flex items-center">
+          <FaChartPie className="mr-2" /> Progress Overview
+        </h2>
         <div
           className={`w-full h-64 shadow rounded-xl cursor-pointer flex items-center justify-center ${themeClasses[theme].chartBg}`}
         >
@@ -487,13 +567,13 @@ const GoalTracker = () => {
           }`}
         >
           <p
-            className={`font-semibold text-lg ${
+            className={`font-semibold text-lg flex items-center ${
               theme === "dark" || theme === "night"
                 ? "text-indigo-300"
                 : "text-indigo-700"
             }`}
           >
-            🎉 Milestone Unlocked: {badge}
+            <FaMedal className="mr-2" /> Milestone Unlocked: {badge}
           </p>
         </div>
       )}
@@ -502,7 +582,9 @@ const GoalTracker = () => {
       <section className="mt-10 p-6 bg-white rounded-lg shadow mx-5">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Search</label>
+            <label className="block text-sm font-medium mb-1 flex items-center">
+              <FaSearch className="mr-1" /> Search
+            </label>
             <input
               type="text"
               placeholder="Search goals..."
@@ -512,7 +594,9 @@ const GoalTracker = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Category</label>
+            <label className="block text-sm font-medium mb-1 flex items-center">
+              <FaFilter className="mr-1" /> Category
+            </label>
             <select
               value={filters.category}
               onChange={(e) =>
@@ -528,8 +612,8 @@ const GoalTracker = () => {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Progress Range
+            <label className="block text-sm font-medium mb-1 flex items-center">
+              <FaChartLine className="mr-1" /> Progress Range
             </label>
             <div className="flex items-center gap-2">
               <input
@@ -562,7 +646,9 @@ const GoalTracker = () => {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Priority</label>
+            <label className="block text-sm font-medium mb-1 flex items-center">
+              <FaStar className="mr-1" /> Priority
+            </label>
             <select
               value={filters.priority}
               onChange={(e) =>
@@ -600,12 +686,14 @@ const GoalTracker = () => {
         }`}
       >
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-semibold" ref={getStartedRef}>📊 Your Goals</h2>
+          <h2 className="text-3xl font-semibold flex items-center" ref={getStartedRef}>
+            <FaCheck className="mr-2" /> Your Goals
+          </h2>
           <button
             onClick={() => setShowModal(true)}
-            className={`${themeClasses[theme].button} text-white cursor-pointer px-4 py-2 rounded transition`}
+            className={`${themeClasses[theme].button} text-white cursor-pointer px-4 py-2 rounded transition flex items-center`}
           >
-            ➕ Add Goal
+            <FaPlus className="mr-2" /> Add Goal
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -648,7 +736,7 @@ const GoalTracker = () => {
                 </div>
                 {goal.progress >= 75 && (
                   <span
-                    className={`text-xs px-3 py-1 rounded-full font-medium ${
+                    className={`text-xs px-3 py-1 rounded-full font-medium flex items-center ${
                       theme === "dark"
                         ? "bg-green-900 text-green-200"
                         : theme === "night"
@@ -656,7 +744,7 @@ const GoalTracker = () => {
                         : "bg-green-100 text-green-700"
                     }`}
                   >
-                    🚀 Milestone!
+                    <FaRocket className="mr-1" /> Milestone!
                   </span>
                 )}
               </div>
@@ -665,7 +753,7 @@ const GoalTracker = () => {
               <div className="flex flex-wrap gap-2">
                 {goal.category && (
                   <span
-                    className={`text-xs px-2 py-1 rounded ${
+                    className={`text-xs px-2 py-1 rounded flex items-center ${
                       theme === "dark"
                         ? "bg-gray-700"
                         : theme === "night"
@@ -673,12 +761,16 @@ const GoalTracker = () => {
                         : "bg-gray-100"
                     }`}
                   >
+                    {goal.category === "work" && <FaBriefcase className="mr-1" />}
+                    {goal.category === "personal" && <FaHeart className="mr-1" />}
+                    {goal.category === "health" && <FaRunning className="mr-1" />}
+                    {goal.category === "learning" && <FaBook className="mr-1" />}
                     {goal.category}
                   </span>
                 )}
                 {goal.priority && (
                   <span
-                    className={`text-xs px-2 py-1 rounded-full ${
+                    className={`text-xs px-2 py-1 rounded-full flex items-center ${
                       goal.priority === "high"
                         ? "bg-red-100 text-red-800"
                         : goal.priority === "medium"
@@ -686,12 +778,15 @@ const GoalTracker = () => {
                         : "bg-green-100 text-green-800"
                     }`}
                   >
+                    {goal.priority === "high" && <FaStar className="mr-1" />}
+                    {goal.priority === "medium" && <FaRegStar className="mr-1" />}
+                    {goal.priority === "low" && <FaRegStar className="mr-1" />}
                     {goal.priority} priority
                   </span>
                 )}
                 {goal.dueDate && (
                   <span
-                    className={`text-xs px-2 py-1 rounded ${
+                    className={`text-xs px-2 py-1 rounded flex items-center ${
                       new Date(goal.dueDate) < new Date() && goal.progress < 100
                         ? "bg-red-100 text-red-800"
                         : theme === "dark"
@@ -701,7 +796,8 @@ const GoalTracker = () => {
                         : "bg-gray-100"
                     }`}
                   >
-                    📅 {new Date(goal.dueDate).toLocaleDateString()}
+                    <FaCalendarAlt className="mr-1" />
+                    {new Date(goal.dueDate).toLocaleDateString()}
                     {new Date(goal.dueDate) < new Date() &&
                       goal.progress < 100 &&
                       " (Overdue)"}
@@ -738,9 +834,9 @@ const GoalTracker = () => {
                       onClick={() =>
                         updateProgress(goal.id, Math.max(0, goal.progress - 10))
                       }
-                      className="text-xs px-2 py-1 bg-gray-200 rounded"
+                      className="text-xs px-2 py-1 bg-gray-200 rounded flex items-center"
                     >
-                      -10%
+                      <FaChevronLeft className="mr-1" /> 10%
                     </button>
                     <button
                       onClick={() =>
@@ -749,9 +845,9 @@ const GoalTracker = () => {
                           Math.min(100, goal.progress + 10)
                         )
                       }
-                      className="text-xs px-2 py-1 bg-gray-200 rounded"
+                      className="text-xs px-2 py-1 bg-gray-200 rounded flex items-center"
                     >
-                      +10%
+                      +10% <FaChevronRight className="ml-1" />
                     </button>
                   </div>
                 </div>
@@ -780,7 +876,9 @@ const GoalTracker = () => {
               {/* Dependencies */}
               {goal.dependsOn && goal.dependsOn.length > 0 && (
                 <div className="text-sm mt-2">
-                  <span className="font-medium">Depends on:</span>
+                  <span className="font-medium flex items-center">
+                    <FaChevronRight className="mr-1" /> Depends on:
+                  </span>
                   <div className="flex flex-wrap gap-1 mt-1">
                     {goal.dependsOn.map((depId) => {
                       const depGoal = goals.find((g) => g.id === depId);
@@ -807,13 +905,13 @@ const GoalTracker = () => {
               {goal.progressHistory && goal.progressHistory.length > 0 && (
                 <div className="mt-4">
                   <p
-                    className={`text-sm font-medium mb-2 ${
+                    className={`text-sm font-medium mb-2 flex items-center ${
                       theme === "dark" || theme === "night"
                         ? "text-gray-300"
                         : "text-gray-700"
                     }`}
                   >
-                    Progress Timeline
+                    <FaChartLine className="mr-2" /> Progress Timeline
                   </p>
                   <div className="space-y-2">
                     {goal.progressHistory
@@ -865,13 +963,13 @@ const GoalTracker = () => {
               {goal.sharedWith && goal.sharedWith.length > 0 && (
                 <div className="mt-4">
                   <p
-                    className={`text-sm font-medium mb-2 ${
+                    className={`text-sm font-medium mb-2 flex items-center ${
                       theme === "dark" || theme === "night"
                         ? "text-gray-300"
                         : "text-gray-700"
                     }`}
                   >
-                    Shared With
+                    <FaUserFriends className="mr-2" /> Shared With
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {goal.sharedWith.map((user, i) => (
@@ -935,7 +1033,7 @@ const GoalTracker = () => {
                       }}
                       className="text-blue-500 text-sm flex items-center cursor-pointer"
                     >
-                      + Add collaborator
+                      <FaPlus className="mr-1" /> Add collaborator
                     </button>
                   </div>
                 </div>
@@ -944,13 +1042,13 @@ const GoalTracker = () => {
               {/* Comments */}
               <div className="mt-4">
                 <p
-                  className={`text-sm font-semibold mb-2 ${
+                  className={`text-sm font-semibold mb-2 flex items-center ${
                     theme === "dark" || theme === "night"
                       ? "text-gray-300"
                       : "text-gray-700"
                   }`}
                 >
-                  💬 Feedback
+                  <FaComment className="mr-2" /> Feedback
                 </p>
                 <div className="flex flex-col gap-2 max-h-32 overflow-y-auto pr-2">
                   {goal.comments.map((comment, idx) => (
@@ -1025,10 +1123,10 @@ const GoalTracker = () => {
                       setGoals(updatedGoals);
                       setCommentInputs({ ...commentInputs, [goal.id]: "" });
                     }}
-                    className={`${themeClasses[theme].button} text-white cursor-pointer px-3 rounded text-sm`}
+                    className={`${themeClasses[theme].button} text-white cursor-pointer px-3 rounded text-sm flex items-center`}
                     disabled={!commentInputs[goal.id]?.trim()}
                   >
-                    Post
+                    <FaComment className="mr-1" /> Post
                   </button>
                 </div>
               </div>
@@ -1045,8 +1143,9 @@ const GoalTracker = () => {
                       )
                     );
                   }}
-                  className="text-sm text-gray-500 hover:text-gray-700 cursor-pointer"
+                  className="text-sm text-gray-500 hover:text-gray-700 cursor-pointer flex items-center"
                 >
+                  <FaArchive className="mr-1" />
                   {goal.isArchived ? "Unarchive" : "Archive"}
                 </button>
                 <button
@@ -1055,8 +1154,9 @@ const GoalTracker = () => {
                       setGoals(goals.filter((g) => g.id !== goal.id));
                     }
                   }}
-                  className="text-sm text-red-500 hover:text-red-700 cursor-pointer"
+                  className="text-sm text-red-500 hover:text-red-700 cursor-pointer flex items-center"
                 >
+                  <FaTrash className="mr-1" />
                   Delete
                 </button>
               </div>
@@ -1085,7 +1185,7 @@ const GoalTracker = () => {
               }`}
               onClick={() => setShowModal(false)}
             >
-              ✖
+              <IoMdClose size={20} />
             </button>
             <h3
               className={`text-xl font-semibold mb-4 ${
@@ -1096,7 +1196,7 @@ const GoalTracker = () => {
                   : "text-indigo-600"
               }`}
             >
-              Add New Goal
+              <FaPlus className="inline mr-2" /> Add New Goal
             </h3>
 
             {/* Template selector */}
@@ -1116,10 +1216,13 @@ const GoalTracker = () => {
                         progress: template.progress,
                       })
                     }
-                    className="border p-3 cursor-pointer rounded-lg text-left hover:bg-gray-50 transition"
+                    className="border p-3 cursor-pointer rounded-lg text-left hover:bg-gray-50 transition flex flex-col"
                   >
-                    <h4 className="font-medium">{template.name}</h4>
-                    <p className="text-sm text-gray-600">
+                    <div className="flex items-center">
+                      {template.icon}
+                      <h4 className="font-medium ml-2">{template.name}</h4>
+                    </div>
+                    <p className="text-sm text-gray-600 mt-1">
                       {template.description}
                     </p>
                   </button>
@@ -1213,9 +1316,9 @@ const GoalTracker = () => {
                   {newGoal.tags?.map((tag, i) => (
                     <span
                       key={i}
-                      className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded"
+                      className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded flex items-center"
                     >
-                      {tag}
+                      #{tag}
                       <button
                         onClick={() =>
                           setNewGoal({
@@ -1236,7 +1339,9 @@ const GoalTracker = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block mb-1">Due Date</label>
+                  <label className="block mb-1 flex items-center">
+                    <FaCalendarAlt className="mr-1" /> Due Date
+                  </label>
                   <input
                     type="date"
                     onChange={(e) =>
@@ -1268,7 +1373,9 @@ const GoalTracker = () => {
               </div>
 
               <div>
-                <label className="block mb-1">Depends On</label>
+                <label className="block mb-1 flex items-center">
+                  <FaChevronRight className="mr-1" /> Depends On
+                </label>
                 <select
                   multiple
                   onChange={(e) => {
@@ -1315,12 +1422,12 @@ const GoalTracker = () => {
                     tags: [],
                     priority: "medium",
                     dueDate: undefined,
-                  dependsOn: []
+                    dependsOn: []
                   });
                 }}
-                className={`${themeClasses[theme].button} text-white py-2 cursor-pointer rounded transition mt-4`}
+                className={`${themeClasses[theme].button} text-white py-2 cursor-pointer rounded transition mt-4 flex items-center justify-center`}
               >
-                Add Goal
+                <FaPlus className="mr-2" /> Add Goal
               </button>
             </div>
           </div>
@@ -1393,13 +1500,13 @@ const GoalTracker = () => {
             }`}
           >
             <h3
-              className={`text-xl font-semibold mb-4 ${
+              className={`text-xl font-semibold mb-4 flex items-center ${
                 theme === "dark" || theme === "night"
                   ? "text-white"
                   : "text-gray-800"
               }`}
             >
-              Settings
+              <IoMdSettings className="mr-2" /> Settings
             </h3>
             <p
               className={`mb-6 ${
@@ -1453,14 +1560,14 @@ const GoalTracker = () => {
                     checked={true}
                     onChange={() => {}}
                   />
-                  Enable notifications
+                  <IoMdNotifications className="mr-2" /> Enable notifications
                 </label>
               </div>
 
               <div className="mt-6 space-y-4">
                 <button
                   onClick={exportGoals}
-                  className={`w-full p-2 ${
+                  className={`w-full p-2 flex items-center justify-center ${
                     theme === "dark"
                       ? "bg-green-900 hover:bg-green-800"
                       : theme === "night"
@@ -1468,19 +1575,19 @@ const GoalTracker = () => {
                       : "bg-green-100 hover:bg-green-200"
                   } text-green-800 rounded transition`}
                 >
-                  Export Goals
+                  <FaFileExport className="mr-2" /> Export Goals
                 </button>
                 <div>
                   <label
-                    className={`block p-2 ${
+                    className={`block p-2 flex items-center justify-center ${
                       theme === "dark"
                         ? "bg-blue-900 hover:bg-blue-800"
                         : theme === "night"
                         ? "bg-purple-900 hover:bg-purple-800"
                         : "bg-blue-100 hover:bg-blue-200"
-                    } text-blue-800 rounded transition cursor-pointer text-center`}
+                    } text-blue-800 rounded transition cursor-pointer`}
                   >
-                    Import Goals
+                    <FaFileImport className="mr-2" /> Import Goals
                     <input
                       type="file"
                       accept=".json"
@@ -1494,9 +1601,9 @@ const GoalTracker = () => {
 
             <button
               onClick={() => setShowSettings(false)}
-              className={`mt-6 px-4 py-2 rounded transition ${themeClasses[theme].button} text-white`}
+              className={`mt-6 px-4 py-2 rounded transition ${themeClasses[theme].button} text-white w-full flex items-center justify-center`}
             >
-              Save Settings
+              <FaCheck className="mr-2" /> Save Settings
             </button>
           </motion.div>
         </div>
